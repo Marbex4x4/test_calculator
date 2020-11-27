@@ -1,3 +1,11 @@
+Con el siguiente diagrama puedes observar el como fue diseñada la solución bajo el patrón de integración de notificación de eventos Publish&Subscribe. En este patrón, una entidad (calculator) es la que publica (o emite) los mensajes y existen varias entidades que se suscriben a esta publicación (una por operación aritmetica).
+
+La comunicación entre los microservicios se realiza a través de un bus de eventos para propagar las actualizaciones entre ellos. El bus de eventos se implementó con la tecnología de infraestructura de agente de mensajería RabbitMQ.
+
+
+
+Fg. La arquitectura de aplicación 
+
 
 # Calculadora sobre microservicios
 
