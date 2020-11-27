@@ -15,10 +15,10 @@ class Operations:
         return response
 
     def get_divide(self, n1, n2):
-        logging.info("Operation: {} * {}".format(n1, n2))
-        multiply = MQClient.MQClient('queue_divide')
+        logging.info("Operation: {} / {}".format(n1, n2))
+        divide = MQClient.MQClient('queue_divide')
         args = [n1, n2]
-        response = multiply.call(*args)
+        response = divide.call(*args)
         logging.info("Operation result: {} / {} = {}".format(n1, n2, response))
         return response
 

@@ -35,7 +35,7 @@ class Listener():
         list_nums = body.decode('utf-8')
         list_nums = list_nums[1:-1].split(',')
         logging.info("Handle request, divide:{}".format(list_nums) )
-        response = Operation.multiply(list_nums)
+        response = Operation.divide(list_nums)
 
         ch.basic_publish(exchange='',
                         routing_key=props.reply_to,
