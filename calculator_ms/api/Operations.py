@@ -31,4 +31,9 @@ class Operations:
         return response
 
     def get_subtract(self, n1, n2):
-        return n1 - n2
+        logging.info("Operation: {} - {}".format(n1, n2))
+        subtract_ = MQClient.MQClient('queue_subtract')
+        args = [n1, n2]
+        response = subtract_.call(*args)
+        logging.info("Operation result: {} - {} = {}".format(n1, n2, response))
+        return response
