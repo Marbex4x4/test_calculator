@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    healthcheck:
+      test: "/opt/rabbitmq/sbin/rabbitmqctl status"
+      interval: 2s
+      timeout: 30s
+      retries: 15
+
+  calculator:
+    build: calculator/
+    depends_on:
+      - multiply
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - "localhost:192.168.0.13"
+    depends_on:
+      - rabbitmq
+
+  multiply:
+    build: multiply/
+    ports:
+      - "8081:8080"
+    extra_hosts:
+      - "localhost:192.168.0.13"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  divide:
+    build: divide/
+    ports:
+      - "8082:8080"
+    extra_hosts:
+      - "localhost:192.168.0.13"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  add:
+    build: add/
+    ports:
+      - "8082:8080"
+    extra_hosts:
+      - "localhost:192.168.0.13"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  
