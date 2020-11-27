@@ -17,7 +17,7 @@ class Listener():
         logging.info("Connecting to rabbitmq server")
 
         connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='localhost'))
+            pika.ConnectionParameters(host='localhost', port='5672'))
 
         channel = connection.channel()
 
@@ -46,9 +46,7 @@ class Listener():
 
 class Operation():
     def divide(list_nums):
-        result = 1
-        for i in list_nums:
-            result = result / float(i)
+        result = float(list_nums[0]) / float(list_nums[1])
         logging.info("Handle response, divide result:{}".format(result) )
         return result
 

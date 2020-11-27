@@ -17,7 +17,7 @@ class Listener():
         logging.info("Connecting to rabbitmq server")
 
         connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='localhost'))
+            pika.ConnectionParameters(host='localhost', port='5672'))
 
         channel = connection.channel()
 
@@ -35,7 +35,7 @@ class Listener():
         list_nums = body.decode('utf-8')
         list_nums = list_nums[1:-1].split(',')
         logging.info("Handle request, add:{}".format(list_nums) )
-        response = Operation.multiply(list_nums)
+        response = Operation.add(list_nums)
 
         ch.basic_publish(exchange='',
                         routing_key=props.reply_to,
@@ -45,10 +45,8 @@ class Listener():
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
 class Operation():
-    def divide(list_nums):
-        result = 1
-        for i in list_nums:
-            result = result / float(i)
+    def add(list_nums):
+        result = float(list_nums[0]) + float(list_nums[1])
         logging.info("Handle response, add result:{}".format(result) )
         return result
 
