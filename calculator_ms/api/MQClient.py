@@ -1,9 +1,12 @@
 import pika
 import uuid
 
+from Logging import * 
+
 class MQClient(object):
 
-    def __init__(self):
+    def __init__(self,queue_name):
+        self.queue_name = queue_name
         self.connection = pika.BlockingConnection(
             pika.ConnectionParameters(host='localhost'))
 
@@ -22,11 +25,12 @@ class MQClient(object):
             self.response = body
 
     def call(self, *args):
+        logging.info("Connecting to rabbitmq queue: {}".format(self.queue_name))
         self.response = None
         self.corr_id = str(uuid.uuid4())
         self.channel.basic_publish(
             exchange='',
-            routing_key='queue_multiply',
+            routing_key= self.queue_name ,
             properties=pika.BasicProperties(
                 reply_to=self.callback_queue,
                 correlation_id=self.corr_id,
