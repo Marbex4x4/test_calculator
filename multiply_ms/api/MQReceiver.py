@@ -21,10 +21,10 @@ class Listener():
 
         channel = connection.channel()
 
-        channel.queue_declare(queue='rpc_queue')
+        channel.queue_declare(queue='queue_multiply')
 
         channel.basic_qos(prefetch_count=1)
-        channel.basic_consume(queue='rpc_queue', on_message_callback=self.on_request)
+        channel.basic_consume(queue='queue_multiply', on_message_callback=self.on_request)
 
         logging.info("###Awaiting requests###")
 

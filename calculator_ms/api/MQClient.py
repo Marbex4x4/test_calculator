@@ -26,7 +26,7 @@ class MQClient(object):
         self.corr_id = str(uuid.uuid4())
         self.channel.basic_publish(
             exchange='',
-            routing_key='rpc_queue',
+            routing_key='queue_multiply',
             properties=pika.BasicProperties(
                 reply_to=self.callback_queue,
                 correlation_id=self.corr_id,
