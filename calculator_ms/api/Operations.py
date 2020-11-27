@@ -23,7 +23,12 @@ class Operations:
         return response
 
     def get_add(self, n1, n2):
-        return n1 + n2
+        logging.info("Operation: {} + {}".format(n1, n2))
+        add_ = MQClient.MQClient('queue_add')
+        args = [n1, n2]
+        response = add_.call(*args)
+        logging.info("Operation result: {} + {} = {}".format(n1, n2, response))
+        return response
 
     def get_subtract(self, n1, n2):
         return n1 - n2
