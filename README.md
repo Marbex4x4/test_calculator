@@ -2,8 +2,7 @@ Con el siguiente diagrama puedes observar el como fue diseñada la solución baj
 
 La comunicación entre los microservicios se realiza a través de un bus de eventos para propagar las actualizaciones entre ellos. El bus de eventos se implementó con la tecnología de infraestructura de agente de mensajería RabbitMQ.
 
-![Image of diagram]
-(https://github.com/Marbex4x4/test_calculator/blob/staging/arq_diagram.jpeg)
+![Image of diagram](https://github.com/Marbex4x4/test_calculator/blob/staging/arq_diagram.jpeg)
 
 Fg. La arquitectura de aplicación 
 
